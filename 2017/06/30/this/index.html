@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>理解javascript中的this › Hexo</title>
   <meta name="author" content="Moyi">
+  
+  <meta name="description" content="this的指向却让人很迷惑。在实际应用中，this 的指向大致可以分为以下四种情况，现在我们来了解一下这四种情况。
+1、作为普通函数调用—-指向全局对象window当函数作为普通函数调用时,this 指向全局对象。在浏览器里，全局对象就是 window。12345var name=&amp;quot;moy">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="理解javascript中的this"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -45,13 +48,12 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   <div class="post-content">
     <header>
       
   
-    <h1 class="title"><a href="/2017/06/30/this/">理解javascript中的this</a></h1>
+    <h1 class="title">理解javascript中的this</h1>
   
 
       
@@ -78,8 +80,27 @@
       
     </div>
       
+      <footer>
         
         
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
       
       <div class="clearfix"></div>
       </footer>
@@ -87,15 +108,12 @@
 </article>
 
 
-
-
-
-
-<nav id="pagination">
+<section id="comment">
   
-  
-  <div class="clearfix"></div>
-</nav></div></div>
+</section>
+
+
+</div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
