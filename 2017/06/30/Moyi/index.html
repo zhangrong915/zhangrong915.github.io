@@ -3,15 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>moyi › Hexo</title>
+  <title>理解javascript中的this › Hexo</title>
   <meta name="author" content="Moyi">
   
-  <meta name="description" content="good nightQuick StartCreate a new post">
+  <meta name="description" content="this的指向却让人很迷惑。在实际应用中，this 的指向大致可以分为以下四种情况，现在我们来了解一下这四种情况。
+1、作为普通函数调用—-指向全局对象window当函数作为普通函数调用时,this 指向全局对象。在浏览器里，全局对象就是 window。12345var name=&amp;quot;moy">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="moyi"/>
+  <meta property="og:title" content="理解javascript中的this"/>
   <meta property="og:site_name" content="Hexo"/>
 
   
@@ -52,7 +53,7 @@
     <header>
       
   
-    <h1 class="title">moyi</h1>
+    <h1 class="title">理解javascript中的this</h1>
   
 
       
@@ -61,7 +62,21 @@
     </header>
     <div class="entry">
       
-        <h2 id="good-night"><a href="#good-night" class="headerlink" title="good night"></a>good night</h2><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
+        <p>this的指向却让人很迷惑。在实际应用中，this 的指向大致可以分为以下四种情况，现在我们来了解一下这四种情况。</p>
+<h2 id="1、作为普通函数调用—-指向全局对象window"><a href="#1、作为普通函数调用—-指向全局对象window" class="headerlink" title="1、作为普通函数调用—-指向全局对象window"></a>1、作为普通函数调用—-指向全局对象window</h2><p>当函数作为普通函数调用时,this 指向全局对象。在浏览器里，全局对象就是 window。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var name=&quot;moyi&quot;</div><div class="line">function thisWindow()&#123;</div><div class="line">    console.log(this.name);</div><div class="line">&#125;</div><div class="line">thisWindow();   //moyi</div></pre></td></tr></table></figure></p>
+<p>从上面可以看出，此时的this指向window(即name为全局变量moyi)。</p>
+<p>注意：如果是在严格模式下,this没有指向全局变量,而是指向undefined。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;</div><div class="line">function thisWindow()&#123;</div><div class="line">    console.log(this);</div><div class="line">&#125;</div><div class="line">thisWindow();   //undefined</div></pre></td></tr></table></figure></p>
+<h2 id="2、作为对象的方法调用—-指向该对象"><a href="#2、作为对象的方法调用—-指向该对象" class="headerlink" title="2、作为对象的方法调用—-指向该对象"></a>2、作为对象的方法调用—-指向该对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var obj=&#123;</div><div class="line">    name:&apos;moyi&apos;,</div><div class="line">    thisObj:function()&#123;</div><div class="line">        console.log(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">obj.thisObj();   //moyi</div></pre></td></tr></table></figure>
+<p>从上面代码可以看出，当作为对象的方法被调用时，this是指向该对象的(即obj)。</p>
+<p>注意：如果把对象的方法赋值给一个变量，再调用这个变量时，此时的this又指向window。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var name=&quot;vivi&quot;;</div><div class="line">var obj=&#123;</div><div class="line">    name:&apos;moyi&apos;,</div><div class="line">    thisObj:function()&#123;</div><div class="line">        console.log(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var fun=obj.thisObj;</div><div class="line">fun();   //vivi</div></pre></td></tr></table></figure>
+<h2 id="3、作为构造函数调用—-指向了该构造函数实例化出来的对象"><a href="#3、作为构造函数调用—-指向了该构造函数实例化出来的对象" class="headerlink" title="3、作为构造函数调用—-指向了该构造函数实例化出来的对象"></a>3、作为构造函数调用—-指向了该构造函数实例化出来的对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function People()&#123;</div><div class="line">    this.name=&quot;moyi&quot;;</div><div class="line">&#125;</div><div class="line">var obj=new People();</div><div class="line">console.log(obj.name);   //moyi</div></pre></td></tr></table></figure>
+<p>注意：如果构造函数返回一个对象,则this指向该对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function People()&#123;</div><div class="line">    this.name=&quot;moyi&quot;;</div><div class="line">    return&#123;</div><div class="line">        name:&quot;vivi&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var obj=new People();</div><div class="line">console.log(obj.name);    //vivi</div></pre></td></tr></table></figure></p>
+<h2 id="4、配合call-或-apply-的调用"><a href="#4、配合call-或-apply-的调用" class="headerlink" title="4、配合call() 或 apply() 的调用"></a>4、配合call() 或 apply() 的调用</h2><p>通过调用call()或apply()可以改变this的指向。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var obj1=&#123;</div><div class="line">    name:&quot;vivi&quot;,</div><div class="line">    getName:function()&#123;</div><div class="line">        console.log(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var obj2=&#123;</div><div class="line">    name:&quot;moyi&quot;</div><div class="line">&#125;</div><div class="line">obj1.getName();   //vivi</div><div class="line">obj1.getName.call(obj2);  //moyi</div><div class="line">obj1.getName.apply(obj2);  //moyi</div></pre></td></tr></table></figure></p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><ul>
+<li>你不知道的javascript(书籍)</li>
+</ul>
+
       
     </div>
       
@@ -102,18 +117,18 @@
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">Neueste Artikel</h3>
+  <h3 class="title">Recent Posts</h3>
   <ul class="entry">
     
       <li>
-        <a href="/2017/06/30/Moyi/">moyi</a>
+        <a href="/2017/06/30/Moyi/">理解javascript中的this</a>
       </li>
     
       <li>
