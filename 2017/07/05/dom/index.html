@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>原生JavaScripe操作DOM节点 › Moyi</title>
+  <meta name="author" content="Moyi">
+  
+  <meta name="description" content="web前端开发博客">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="原生JavaScripe操作DOM节点"/>
+  <meta property="og:site_name" content="Moyi"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Moyi" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Moyi</a></h1>
+  <h2><a href="/">个人博客</a></h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/about">About</a></li>
+      
+      <li><a href="/archives">Archives</a></li>
+      
+      <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">原生JavaScripe操作DOM节点</h1>
+  
+
+      
+        <time datetime="2017-07-05T09:31:39.629Z">2017-07-05</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>本篇文章主要介绍利用原生js进行DOM节点的操作，主要包括创建、添加、删除、替换、插入、复制、移动等操作。</p>
+<h2 id="1、创建节点"><a href="#1、创建节点" class="headerlink" title="1、创建节点"></a>1、创建节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var dom=document.createElement(&quot;div&quot;);  //创建元素节点</div><div class="line">var text=document.createTextNode(&quot;hello Moyi&quot;);  //创建文本节点</div></pre></td></tr></table></figure>
+<h2 id="2、插入节点"><a href="#2、插入节点" class="headerlink" title="2、插入节点"></a>2、插入节点</h2><h3 id="appendChild"><a href="#appendChild" class="headerlink" title="appendChild()"></a>appendChild()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dom.appendChild(text); //将文本节点插入到dom节点中 </div><div class="line">parent.appendChild(dom); //将子元素节点插入到父元素节点</div></pre></td></tr></table></figure>
+<p>注意：appendchild()是在父节点中的子节点的末尾添加新的节点（相对于父节点来说）。</p>
+<h3 id="insertBefore"><a href="#insertBefore" class="headerlink" title="insertBefore()"></a>insertBefore()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parent.insertBefore(newNode,oldNode);</div></pre></td></tr></table></figure>
+<p>注意：insertBefore()是在已有的节点前添加新的节点（相对于子节点来说的）其中parent代表父节点，newNode代表新子节点，oldNode代表老子节点。</p>
+<h2 id="3、删除节点"><a href="#3、删除节点" class="headerlink" title="3、删除节点"></a>3、删除节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parent.removeChild(child); //删除父节点parent下面的子节点child</div></pre></td></tr></table></figure>
+<h2 id="4、替换节点"><a href="#4、替换节点" class="headerlink" title="4、替换节点"></a>4、替换节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parent.replaceChild(newchild,oldchild); //将父节点parent下面的子节点oldchild替换为新的子节点newchild</div></pre></td></tr></table></figure>
+<h2 id="5、复制节点"><a href="#5、复制节点" class="headerlink" title="5、复制节点"></a>5、复制节点</h2><h3 id="深复制：复制节点和节点下面的所有子节点"><a href="#深复制：复制节点和节点下面的所有子节点" class="headerlink" title="深复制：复制节点和节点下面的所有子节点"></a>深复制：复制节点和节点下面的所有子节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var cloneNode=parent.cloneNode(true);</div></pre></td></tr></table></figure>
+<p>注意：会复制节点parent和parent的子节点下面的所有内容。</p>
+<h3 id="浅复制：只复制当前节点，不复制子节点"><a href="#浅复制：只复制当前节点，不复制子节点" class="headerlink" title="浅复制：只复制当前节点，不复制子节点"></a>浅复制：只复制当前节点，不复制子节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var cloneNode=parent.cloneNode(false);</div></pre></td></tr></table></figure>
+<p>注意：只会复制节点parent的内容。</p>
+<h2 id="6、查找节点"><a href="#6、查找节点" class="headerlink" title="6、查找节点"></a>6、查找节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">document.getElementById(&quot;id&quot;); //通过id查找</div><div class="line">docuemnt.getElementsByClassName(&quot;class</div><div class="line">Name&quot;); //通过类名class查找</div><div class="line">document.getElementSByTagName(&quot;p&quot;); //通过标签名查找</div></pre></td></tr></table></figure>
+<h3 id="根节点"><a href="#根节点" class="headerlink" title="根节点"></a>根节点</h3><p>有两种特殊的文档属性可用来访问根节点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">document.documentElement</div><div class="line">document.body</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+      
+      <footer>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/javascript/">javascript</a>, <a href="/tags/DOM/">DOM</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+      </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:zhangrong915.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Neueste Artikel</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2017/07/05/dom/">原生JavaScripe操作DOM节点</a>
+      </li>
+    
+      <li>
+        <a href="/2017/07/03/position/">css的position属性(static、fixed、relative、absolute)</a>
+      </li>
+    
+      <li>
+        <a href="/2017/06/30/js-this/">理解javascript中的this</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag-Cloud</h3>
+  <div class="entry">
+    <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Moyi
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+</body>
+</html>
+
