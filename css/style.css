@@ -589,18 +589,14 @@ article footer .addthis iframe {
   font-size: 0.9em;
   padding: 15px 20px;
 }
-#sidebar .widget ul,
 #sidebar .widget ol,
 #sidebar .widget dl {
   list-style: none;
 }
-#sidebar .widget ul ul,
 #sidebar .widget ol ul,
 #sidebar .widget dl ul,
-#sidebar .widget ul ol,
 #sidebar .widget ol ol,
 #sidebar .widget dl ol,
-#sidebar .widget ul dl,
 #sidebar .widget ol dl,
 #sidebar .widget dl dl {
   list-style: disc;
