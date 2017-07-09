@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>冒泡排序 › Moyi</title>
+  <meta name="author" content="Moyi">
+  
+  <meta name="description" content="web前端开发博客">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="冒泡排序"/>
+  <meta property="og:site_name" content="Moyi"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Moyi" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header"><div class="meta inner">
+  <h1><a href="/">Moyi</a></h1>
+  <h2><a href="/">个人博客</a></h2>
+  <nav id="main-nav">
+    <ul>
+      
+      <li><a href="/about">About</a></li>
+      
+      <li><a href="/archives">Archives</a></li>
+      
+      <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+</div>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">冒泡排序</h1>
+  
+
+      
+        <time datetime="2017-07-09T05:59:28.990Z">2017-07-09</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>本篇文章主要介绍冒泡排序（升序和降序）。</p>
+<h2 id="1、冒泡排序（升序）"><a href="#1、冒泡排序（升序）" class="headerlink" title="1、冒泡排序（升序）"></a>1、冒泡排序（升序）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var arr=[12,2,34,23,34,56,9,67,5,6,3,45];</div><div class="line"></div><div class="line">function bubbleSortAsc(arr)&#123;</div><div class="line">    var length=arr.length;</div><div class="line">    var temp;</div><div class="line">    for(var i=0;i&lt;length-1;i++)&#123;</div><div class="line">        for(var j=i+1;j&lt;length;j++)&#123;</div><div class="line">            if(arr[i]&gt;arr[j])&#123; //升序</div><div class="line">                temp=arr[i];</div><div class="line">                arr[i]=arr[j];</div><div class="line">                arr[j]=temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line">console.log(bubbleSortAsc(arr));  //[ 2, 3, 5, 6, 9, 12, 23, 34, 34, 45, 56, 67 ]</div></pre></td></tr></table></figure>
+<h2 id="2、冒泡排序（降序）"><a href="#2、冒泡排序（降序）" class="headerlink" title="2、冒泡排序（降序）"></a>2、冒泡排序（降序）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">var arr=[12,2,34,23,34,56,9,67,5,6,3,45];</div><div class="line">function bubbleSortAsc(arr)&#123;</div><div class="line">    var length=arr.length;</div><div class="line">    var temp;</div><div class="line">    for(var i=0;i&lt;length-1;i++)&#123;</div><div class="line">        for(var j=i+1;j&lt;length;j++)&#123;</div><div class="line">            if(arr[i]&gt;arr[j])&#123; //升序</div><div class="line">                temp=arr[i];</div><div class="line">                arr[i]=arr[j];</div><div class="line">                arr[j]=temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line">console.log(bubbleSortAsc(arr));  //[ 2, 3, 5, 6, 9, 12, 23, 34, 34, 45, 56, 67 ]</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">var arr=[12,2,34,23,34,56,9,67,5,6,3,45];</div><div class="line"></div><div class="line">function bubbleSortDsc(arr)&#123;</div><div class="line">    var length=arr.length;</div><div class="line">    var temp;</div><div class="line">    for(var i=0;i&lt;length-1;i++)&#123;</div><div class="line">        for(var j=i+1;j&lt;length;j++)&#123;</div><div class="line">            if(arr[i]&lt;arr[j])&#123; //降序</div><div class="line">                temp=arr[i];</div><div class="line">                arr[i]=arr[j];</div><div class="line">                arr[j]=temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line">console.log(bubbleSortDsc(arr)); //[ 67, 56, 45, 34, 34, 23, 12, 9, 6, 5, 3, 2 ]</div></pre></td></tr></table></figure>
+      
+    </div>
+      
+      <footer>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/javascript/">javascript</a>, <a href="/tags/算法/">算法</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+      </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Buscar">
+    <input type="hidden" name="q" value="site:zhangrong915.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Entradas Recientes</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2017/07/09/bubbleSort/">冒泡排序</a>
+      </li>
+    
+      <li>
+        <a href="/2017/07/05/dom/">原生JavaScripe操作DOM节点</a>
+      </li>
+    
+      <li>
+        <a href="/2017/07/03/position/">css的position属性(static、fixed、relative、absolute)</a>
+      </li>
+    
+      <li>
+        <a href="/2017/06/30/js-this/">理解javascript中的this</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Nube de Etiquetas</h3>
+  <div class="entry">
+    <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+  </div>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 Moyi
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+</body>
+</html>
+
