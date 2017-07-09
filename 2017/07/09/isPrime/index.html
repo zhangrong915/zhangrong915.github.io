@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>css › Moyi</title>
+  <title>质数（素数）的判断 › Moyi</title>
   <meta name="author" content="Moyi">
   
   <meta name="description" content="web前端开发博客">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="质数（素数）的判断"/>
   <meta property="og:site_name" content="Moyi"/>
 
   
@@ -47,23 +47,63 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">css</h2>
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title">质数（素数）的判断</h1>
+  
 
-
-  <div class="archive">
-    
-      <article class="post">
-        <div class="post-content">
-          <header>
-            
-              <h2 class="archive-post"><span datetime="2017-07-03T12:38:47.789Z">2017-07-03</span><a href="/2017/07/03/position/">css的position属性(static、fixed、relative、absolute)</a></h1>
-            
-          </header>
-        </div>
-      </article>
-    
+      
+        <time datetime="2017-07-09T06:57:40.038Z">2017-07-09</time>
+      
+    </header>
+    <div class="entry">
+      
+        <p>本篇文章主要给出一个判断某个数是不是质数的方法。</p>
+<p>质数的定义：在大于1的自然数中，除了1和它本身以外不再有其他因数，这样的数称为质数。</p>
+<h2 id="判断质数-isPrime"><a href="#判断质数-isPrime" class="headerlink" title="判断质数 isPrime()"></a>判断质数 isPrime()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function isPrime(n)&#123;</div><div class="line">    if(n&lt;2)&#123;</div><div class="line">       return true; </div><div class="line">    &#125;</div><div class="line">    for(var i=2;i*i&lt;=n;i++)&#123;</div><div class="line">        if(n%i==0)&#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+      
+      <footer>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/javascript/">javascript</a>
   </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+      </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  
+</section>
+
 
 </div></div>
     <aside id="sidebar" class="alignright">
