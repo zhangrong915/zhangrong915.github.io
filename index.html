@@ -62,17 +62,15 @@
     </header>
     <div class="entry">
       
-        <blockquote>
-<p>本篇文章主要介绍几种元素水平居中的实现方法</p>
+        <p>本篇文章主要介绍几种元素水平居中的实现方法</p>
 <h2 id="1、将固定宽度的元素的左右margin值设置为auto"><a href="#1、将固定宽度的元素的左右margin值设置为auto" class="headerlink" title="1、将固定宽度的元素的左右margin值设置为auto"></a>1、将固定宽度的元素的左右margin值设置为auto</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.main&#123;</div><div class="line">    width:固定的宽度值;</div><div class="line">    margin-left:auto;</div><div class="line">    margin-right:auto;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</blockquote>
 <p>注意：这个方法的前提是元素的宽度是固定的，优点：兼容性强，缺点：无法自适应。</p>
 <h2 id="2、inline-block实现水平居中"><a href="#2、inline-block实现水平居中" class="headerlink" title="2、inline-block实现水平居中"></a>2、inline-block实现水平居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.main-wrap&#123;</div><div class="line">    text-align:center;</div><div class="line">&#125;</div><div class="line">.main&#123;</div><div class="line">    display:inline-block;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>注意1：在这个方法中，我们需要</p>
-<blockquote>
-<p>在父元素中设置：text-align:center;</p>
-<p>在子元素中设置：display:inline-block;</p>
-</blockquote>
+<ul>
+<li>在父元素中设置：text-align:center;</li>
+<li>在子元素中设置：display:inline-block;</li>
+</ul>
 <p>注意2： 注意:在需要居中的元素中的文字被居中显示了，缺点：需要处理inline-block的浏览器兼容问题。</p>
 <h2 id="3、绝对定位absolute实现水平居中"><a href="#3、绝对定位absolute实现水平居中" class="headerlink" title="3、绝对定位absolute实现水平居中"></a>3、绝对定位absolute实现水平居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.main&#123;</div><div class="line">    position:absolute;</div><div class="line">    width:600px;</div><div class="line">    left:50%;</div><div class="line">    margin-left:-300px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>注意：使用绝对定位时，需要居中显示的元素必须要有固定的宽度，left值为50%，margin-left:-(宽度值/2)；兼容性比较好，但是固定的宽度无法实现自适应。</p>
@@ -88,6 +86,7 @@
 <p>注意：width:fit-content需要结合左右margin设置为auto时，才能实现水平居中的效果；缺点：兼容性比较差。</p>
 <h2 id="6、浮动-定位实现水平居中"><a href="#6、浮动-定位实现水平居中" class="headerlink" title="6、浮动+定位实现水平居中"></a>6、浮动+定位实现水平居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.main-wrap&#123;</div><div class="line">        float:left;</div><div class="line">        position:relative;</div><div class="line">        left:50%;</div><div class="line">    &#125;</div><div class="line">    .main&#123;</div><div class="line">        float:left;</div><div class="line">        clear:left;</div><div class="line">        position:relative;</div><div class="line">        right:50%;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>此方法的兼容性比较好，但是不易理解。</p>
+<p><a href="https://github.com/zhangrong915/Horizontal-Center" target="_blank" rel="external">参考源码</a></p>
 
       
     </div>
