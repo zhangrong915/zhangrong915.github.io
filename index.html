@@ -53,6 +53,62 @@
     <header>
       
   
+    <h1 class="title"><a href="/2017/07/16/Horizontal-Center/">元素水平居中布局的实现</a></h1>
+  
+
+      
+        <time datetime="2017-07-16T01:50:21.269Z">2017-07-16</time>
+      
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>本篇文章主要介绍几种元素水平居中的实现方法</p>
+<h2 id="1、将固定宽度的元素的左右margin值设置为auto"><a href="#1、将固定宽度的元素的左右margin值设置为auto" class="headerlink" title="1、将固定宽度的元素的左右margin值设置为auto"></a>1、将固定宽度的元素的左右margin值设置为auto</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.main&#123;</div><div class="line">    width:固定的宽度值;</div><div class="line">    margin-left:auto;</div><div class="line">    margin-right:auto;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>注意：这个方法的前提是元素的宽度是固定的，优点：兼容性强，缺点：无法自适应。</p>
+<h2 id="2、inline-block实现水平居中"><a href="#2、inline-block实现水平居中" class="headerlink" title="2、inline-block实现水平居中"></a>2、inline-block实现水平居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.main-wrap&#123;</div><div class="line">    text-align:center;</div><div class="line">&#125;</div><div class="line">.main&#123;</div><div class="line">    display:inline-block;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意1：在这个方法中，我们需要</p>
+<blockquote>
+<p>在父元素中设置：text-align:center;</p>
+<p>在子元素中设置：display:inline-block;</p>
+</blockquote>
+<p>注意2： 注意:在需要居中的元素中的文字被居中显示了，缺点：需要处理inline-block的浏览器兼容问题。</p>
+<h2 id="3、绝对定位absolute实现水平居中"><a href="#3、绝对定位absolute实现水平居中" class="headerlink" title="3、绝对定位absolute实现水平居中"></a>3、绝对定位absolute实现水平居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.main&#123;</div><div class="line">    position:absolute;</div><div class="line">    width:600px;</div><div class="line">    left:50%;</div><div class="line">    margin-left:-300px;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意：使用绝对定位时，需要居中显示的元素必须要有固定的宽度，left值为50%，margin-left:-(宽度值/2)；兼容性比较好，但是固定的宽度无法实现自适应。</p>
+<h2 id="4、CSS3的flex实现水平居中"><a href="#4、CSS3的flex实现水平居中" class="headerlink" title="4、CSS3的flex实现水平居中"></a>4、CSS3的flex实现水平居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.main&#123;</div><div class="line">    display:flex;</div><div class="line">    justify-content:center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此方法使用了CSS3的flex布局；缺点：兼容性比较差，参考:</p>
+<ul>
+<li><p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">阮一峰博客之flex教程</a>。</p>
+</li>
+<li><p><a href="https://www.w3cplus.com/css3/a-guide-to-flexbox.html" target="_blank" rel="external">w3cplus之flexbox教程</a></p>
+</li>
+</ul>
+<h2 id="5、CSS3的width-fit-content实现水平居中"><a href="#5、CSS3的width-fit-content实现水平居中" class="headerlink" title="5、CSS3的width:fit-content实现水平居中"></a>5、CSS3的width:fit-content实现水平居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.main&#123;</div><div class="line">        margin-left:auto;</div><div class="line">        margin-right:auto;</div><div class="line">        width:fit-content;</div><div class="line">        width:-webkit-fit-content;</div><div class="line">        width:-moz-fit-content;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>注意：width:fit-content需要结合左右margin设置为auto时，才能实现水平居中的效果；缺点：兼容性比较差。</p>
+<h2 id="6、浮动-定位实现水平居中"><a href="#6、浮动-定位实现水平居中" class="headerlink" title="6、浮动+定位实现水平居中"></a>6、浮动+定位实现水平居中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.main-wrap&#123;</div><div class="line">        float:left;</div><div class="line">        position:relative;</div><div class="line">        left:50%;</div><div class="line">    &#125;</div><div class="line">    .main&#123;</div><div class="line">        float:left;</div><div class="line">        clear:left;</div><div class="line">        position:relative;</div><div class="line">        right:50%;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>此方法的兼容性比较好，但是不易理解。</p>
+
+      
+    </div>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+      </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
     <h1 class="title"><a href="/2017/07/09/isPrime/">质数（素数）的判断</a></h1>
   
 
@@ -198,68 +254,30 @@
 
 
 
-  <article class="post">
-  <div class="post-content">
-    <header>
-      
-  
-    <h1 class="title"><a href="/2017/06/30/js-this/">理解javascript中的this</a></h1>
-  
-
-      
-        <time datetime="2017-06-30T02:54:50.863Z">2017-06-30</time>
-      
-    </header>
-    <div class="entry">
-      
-        <p>this的指向却让人很迷惑。在实际应用中，this 的指向大致可以分为以下四种情况，现在我们来了解一下这四种情况。</p>
-<h2 id="1、作为普通函数调用—-指向全局对象window"><a href="#1、作为普通函数调用—-指向全局对象window" class="headerlink" title="1、作为普通函数调用—-指向全局对象window"></a>1、作为普通函数调用—-指向全局对象window</h2><p>当函数作为普通函数调用时,this 指向全局对象。在浏览器里，全局对象就是 window。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var name=&quot;moyi&quot;</div><div class="line">function thisWindow()&#123;</div><div class="line">    console.log(this.name);</div><div class="line">&#125;</div><div class="line">thisWindow();   //moyi</div></pre></td></tr></table></figure></p>
-<p>从上面可以看出，此时的this指向window(即name为全局变量moyi)。</p>
-<p>注意：如果是在严格模式下,this没有指向全局变量,而是指向undefined。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;</div><div class="line">function thisWindow()&#123;</div><div class="line">    console.log(this);</div><div class="line">&#125;</div><div class="line">thisWindow();   //undefined</div></pre></td></tr></table></figure></p>
-<h2 id="2、作为对象的方法调用—-指向该对象"><a href="#2、作为对象的方法调用—-指向该对象" class="headerlink" title="2、作为对象的方法调用—-指向该对象"></a>2、作为对象的方法调用—-指向该对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var obj=&#123;</div><div class="line">    name:&apos;moyi&apos;,</div><div class="line">    thisObj:function()&#123;</div><div class="line">        console.log(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">obj.thisObj();   //moyi</div></pre></td></tr></table></figure>
-<p>从上面代码可以看出，当作为对象的方法被调用时，this是指向该对象的(即obj)。</p>
-<p>注意：如果把对象的方法赋值给一个变量，再调用这个变量时，此时的this又指向window。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var name=&quot;vivi&quot;;</div><div class="line">var obj=&#123;</div><div class="line">    name:&apos;moyi&apos;,</div><div class="line">    thisObj:function()&#123;</div><div class="line">        console.log(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var fun=obj.thisObj;</div><div class="line">fun();   //vivi</div></pre></td></tr></table></figure>
-<h2 id="3、作为构造函数调用—-指向了该构造函数实例化出来的对象"><a href="#3、作为构造函数调用—-指向了该构造函数实例化出来的对象" class="headerlink" title="3、作为构造函数调用—-指向了该构造函数实例化出来的对象"></a>3、作为构造函数调用—-指向了该构造函数实例化出来的对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function People()&#123;</div><div class="line">    this.name=&quot;moyi&quot;;</div><div class="line">&#125;</div><div class="line">var obj=new People();</div><div class="line">console.log(obj.name);   //moyi</div></pre></td></tr></table></figure>
-<p>注意：如果构造函数返回一个对象,则this指向该对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function People()&#123;</div><div class="line">    this.name=&quot;moyi&quot;;</div><div class="line">    return&#123;</div><div class="line">        name:&quot;vivi&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var obj=new People();</div><div class="line">console.log(obj.name);    //vivi</div></pre></td></tr></table></figure></p>
-<h2 id="4、配合call-或-apply-的调用"><a href="#4、配合call-或-apply-的调用" class="headerlink" title="4、配合call() 或 apply() 的调用"></a>4、配合call() 或 apply() 的调用</h2><p>通过调用call()或apply()可以改变this的指向。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var obj1=&#123;</div><div class="line">    name:&quot;vivi&quot;,</div><div class="line">    getName:function()&#123;</div><div class="line">        console.log(this.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var obj2=&#123;</div><div class="line">    name:&quot;moyi&quot;</div><div class="line">&#125;</div><div class="line">obj1.getName();   //vivi</div><div class="line">obj1.getName.call(obj2);  //moyi</div><div class="line">obj1.getName.apply(obj2);  //moyi</div></pre></td></tr></table></figure></p>
-<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><ul>
-<li>你不知道的javascript(书籍)h</li>
-</ul>
-
-      
-    </div>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-      </footer>
-  </div>
-</article>
-
-
-
-
-
 
 <nav id="pagination">
   
+  
+    <a href="/page/2/" class="alignright next">Nächste Seite</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Buscar">
+    <input type="search" name="q" results="0" placeholder="Suche">
     <input type="hidden" name="q" value="site:zhangrong915.github.io">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">Entradas Recientes</h3>
+  <h3 class="title">Neueste Artikel</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2017/07/16/Horizontal-Center/">元素水平居中布局的实现</a>
+      </li>
     
       <li>
         <a href="/2017/07/09/isPrime/">质数（素数）的判断</a>
@@ -277,10 +295,6 @@
         <a href="/2017/07/03/position/">css的position属性(static、fixed、relative、absolute)</a>
       </li>
     
-      <li>
-        <a href="/2017/06/30/js-this/">理解javascript中的this</a>
-      </li>
-    
   </ul>
 </div>
 
@@ -289,9 +303,9 @@
 
   
 <div class="widget tagcloud">
-  <h3 class="title">Nube de Etiquetas</h3>
+  <h3 class="title">Tag-Cloud</h3>
   <div class="entry">
-    <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+    <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
   </div>
 </div>
 
