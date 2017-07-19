@@ -213,30 +213,11 @@ article .gallery .next {
   height: 100%;
   cursor: pointer;
 }
-article .gallery .prev:before,
-article .gallery .next:before {
-  position: absolute;
-  font: 24px/1 font-icon;
-  text-align: center;
-  width: 24px;
-  text-shadow: 0 0 15px rgba(0,0,0,0.5);
-  color: #fff;
-  margin-top: -12px;
-  top: 50%;
-}
 article .gallery .prev {
   left: 0;
 }
-article .gallery .prev:before {
-  content: '\f053';
-  left: 10px;
-}
 article .gallery .next {
   right: 0;
-}
-article .gallery .next:before {
-  content: '\f054';
-  right: 10px;
 }
 article header .icon {
   width: 32px;

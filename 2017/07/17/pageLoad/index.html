@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>质数（素数）的判断 › Moyi</title>
+  <title>比较window.onload和DOMContentLoaded › Moyi</title>
   <meta name="author" content="Moyi">
   
   <meta name="description" content="web前端开发博客">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="质数（素数）的判断"/>
+  <meta property="og:title" content="比较window.onload和DOMContentLoaded"/>
   <meta property="og:site_name" content="Moyi"/>
 
   
@@ -52,18 +52,24 @@
     <header>
       
   
-    <h1 class="title">质数（素数）的判断</h1>
+    <h1 class="title">比较window.onload和DOMContentLoaded</h1>
   
 
       
-        <time datetime="2017-07-09T06:57:40.038Z">2017-07-09</time>
+        <time datetime="2017-07-17T03:21:25.050Z">2017-07-17</time>
       
     </header>
     <div class="entry">
       
-        <p>本篇文章主要给出一个判断某个数是不是质数的方法。</p>
-<p>质数的定义：在大于1的自然数中，除了1和它本身以外不再有其他因数，这样的数称为质数。</p>
-<h2 id="判断质数-isPrime"><a href="#判断质数-isPrime" class="headerlink" title="判断质数 isPrime()"></a>判断质数 isPrime()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function isPrime(n)&#123;</div><div class="line">    if(n&lt;2)&#123;</div><div class="line">       return true; </div><div class="line">    &#125;</div><div class="line">    for(var i=2;i*i&lt;=n;i++)&#123;</div><div class="line">        if(n%i==0)&#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <ul>
+<li>window.onload:页面载入完成时执行，包括了图片的加载完成;</li>
+<li>DOMContentLoaded:当DOM树构建完成时执行;</li>
+<li>$(document).ready(function(){}):DOM树构建完成时执行;</li>
+</ul>
+<p>所以，一般情况下，DOMContentLoaded会在window.onload之前执行。</p>
+<p>注意：IE不支持DOMContentLoaded事件，模拟这个事件常见的方法是判断element的doScroll如果成功则说明DOM载入完成。</p>
+<p>jQuery中使用$(document).ready(function(){})（简写为$(function(){}) ）这都是使用了DOMContentLoaded事件，即$(document).ready(function(){})是DOM结构绘制完毕后就执行，不必等到加载完毕。</p>
+
       
     </div>
       

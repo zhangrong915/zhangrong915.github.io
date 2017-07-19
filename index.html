@@ -53,6 +53,96 @@
     <header>
       
   
+    <h1 class="title"><a href="/2017/07/18/ArrayLike/">类数组+类数组转为数组</a></h1>
+  
+
+      
+        <time datetime="2017-07-18T14:36:04.844Z">2017-07-18</time>
+      
+    </header>
+    <div class="entry">
+      
+        <h2 id="一、类数组"><a href="#一、类数组" class="headerlink" title="一、类数组"></a>一、类数组</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>可以通过索引访问元素，并且拥有 length 属性；没有数组的其他方法；<br>ps:参考了其他文章的定义</p>
+<h3 id="常见的类数组"><a href="#常见的类数组" class="headerlink" title="常见的类数组"></a>常见的类数组</h3><h4 id="1、类数组对象"><a href="#1、类数组对象" class="headerlink" title="1、类数组对象"></a>1、类数组对象</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var object=&#123;</div><div class="line">    0:&apos;apple&apos;,</div><div class="line">    1:&apos;orange&apos;,</div><div class="line">    2:&apos;banana&apos;,</div><div class="line">    length:3;</div><div class="line">&#125;</div><div class="line">var arr=Array.prototype.slice.call(object);</div><div class="line">console.log(arr,arr.length);//[ &apos;apple&apos;, &apos;orange&apos;, &apos;banana&apos; ] 3</div></pre></td></tr></table></figure>
+<p>注意：以上的类数组对象有length属性，键值中的0、1、2相当于数组的下标。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var object=&#123;</div><div class="line">    0:&apos;apple&apos;,</div><div class="line">    1:&apos;orange&apos;,</div><div class="line">    2:&apos;banana&apos;,</div><div class="line">    8:&apos;red&apos;,</div><div class="line">    length:4</div><div class="line">&#125;;</div><div class="line">var arr=Array.prototype.slice.call(object);</div><div class="line">console.log(arr,arr.length,arr[8]);  //[ &apos;apple&apos;, &apos;orange&apos;, &apos;banana&apos;,  ] 4 undefined</div></pre></td></tr></table></figure></p>
+<p>注意：由于length属性为4，所以这个数组中应该有4个元素，但是下标为0、1、2、8所以，第四个元素(下标为3)不能取到值（即为undefined）,下标为8的元素在数组中自动被去除掉了。</p>
+<h4 id="2、arguments"><a href="#2、arguments" class="headerlink" title="2、arguments"></a>2、arguments</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function sum(a,b,c,d,e,f,g)&#123;</div><div class="line">    var arr=Array.prototype.slice.call(arguments); //将类数组转化为数组</div><div class="line">    console.log(arr instanceof Array);</div><div class="line">    console.log(arr);</div><div class="line">&#125;</div><div class="line">sum(1,2,3,4,5,6,7);</div><div class="line">//true</div><div class="line">// 1, 2, 3, 4, 5, 6, 7 ]</div></pre></td></tr></table></figure>
+<h4 id="3、NodeList"><a href="#3、NodeList" class="headerlink" title="3、NodeList"></a>3、NodeList</h4><p>NodeList 对象是一个节点的集合，是由 Node.childNodes 和 document.querySelectorAll 返回的<br>html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li&gt;1&lt;/li&gt;</div><div class="line">    &lt;li&gt;2&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li&gt;a&lt;/li&gt;</div><div class="line">    &lt;li&gt;b&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure></p>
+<p>js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var li=document.getElementsByTagName(&quot;li&quot;);</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var li=document.querySelectorAll(&quot;li&quot;);</div></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>大多数情况下，NodeList 对象都是个实时集合。意思是说，如果文档中的节点树发生变化，则已经存在的 NodeList 对象也可能会变化。</li>
+<li>在另一些情况下，NodeList 是一个静态集合，也就意味着随后对文档对象模型的任何改动都不会影响集合的内容。document.querySelectorAll 返回一个静态的 NodeList。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var arr=Array.prototype.slice.call(li);  // 转为数组</div><div class="line">//  或者 var arr=Array.call(null,li);</div><div class="line">console.log(li instanceof Array); //false</div><div class="line">console.log(arr instanceof Array);  //true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="二、类数组转为数组"><a href="#二、类数组转为数组" class="headerlink" title="二、类数组转为数组"></a>二、类数组转为数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var object=&#123;</div><div class="line">    0:&apos;apple&apos;,</div><div class="line">    1:&apos;orange&apos;,</div><div class="line">    2:&apos;banana&apos;,</div><div class="line">    length:3</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="1、Array-prototype-slice-call"><a href="#1、Array-prototype-slice-call" class="headerlink" title="1、Array.prototype.slice.call()"></a>1、Array.prototype.slice.call()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var arr1=Array.prototype.slice.call(object);</div><div class="line">console.log(arr1);</div></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var arr2=[].slice.call(object);</div></pre></td></tr></table></figure></p>
+<h3 id="2、Array-from"><a href="#2、Array-from" class="headerlink" title="2、Array.from()"></a>2、Array.from()</h3><p>Array.from()是ES6中的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var arr2=Array.from(object);</div><div class="line">console.log(arr2); //[ &apos;apple&apos;, &apos;orange&apos;, &apos;banana&apos; ]</div></pre></td></tr></table></figure>
+<h3 id="3、扩展运算符"><a href="#3、扩展运算符" class="headerlink" title="3、扩展运算符"></a>3、扩展运算符</h3><p>ES6中的扩展运算符…也能将某些数据结构转换成数组，这种数据结构必须有遍历器接口。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var arr3=[...object];</div></pre></td></tr></table></figure></p>
+<p>注意:因为object对象没有遍历器接口，所以出错。</p>
+<h3 id="4、JQuery的-makeArray-方法"><a href="#4、JQuery的-makeArray-方法" class="headerlink" title="4、JQuery的$.makeArray()方法"></a>4、JQuery的$.makeArray()方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var arr = $.makeArray(object);</div><div class="line">console.log(arr);//[ &apos;apple&apos;, &apos;orange&apos;, &apos;banana&apos; ]</div></pre></td></tr></table></figure>
+
+      
+    </div>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+      </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
+    <h1 class="title"><a href="/2017/07/17/pageLoad/">比较window.onload和DOMContentLoaded</a></h1>
+  
+
+      
+        <time datetime="2017-07-17T03:21:25.050Z">2017-07-17</time>
+      
+    </header>
+    <div class="entry">
+      
+        <ul>
+<li>window.onload:页面载入完成时执行，包括了图片的加载完成;</li>
+<li>DOMContentLoaded:当DOM树构建完成时执行;</li>
+<li>$(document).ready(function(){}):DOM树构建完成时执行;</li>
+</ul>
+<p>所以，一般情况下，DOMContentLoaded会在window.onload之前执行。</p>
+<p>注意：IE不支持DOMContentLoaded事件，模拟这个事件常见的方法是判断element的doScroll如果成功则说明DOM载入完成。</p>
+<p>jQuery中使用$(document).ready(function(){})（简写为$(function(){}) ）这都是使用了DOMContentLoaded事件，即$(document).ready(function(){})是DOM结构绘制完毕后就执行，不必等到加载完毕。</p>
+
+      
+    </div>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+      </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  <div class="post-content">
+    <header>
+      
+  
     <h1 class="title"><a href="/2017/07/16/verticalCenter/">元素垂直居中布局的实现</a></h1>
   
 
@@ -175,82 +265,6 @@
 
 
 
-  <article class="post">
-  <div class="post-content">
-    <header>
-      
-  
-    <h1 class="title"><a href="/2017/07/09/bubbleSort/">冒泡排序</a></h1>
-  
-
-      
-        <time datetime="2017-07-09T05:59:28.990Z">2017-07-09</time>
-      
-    </header>
-    <div class="entry">
-      
-        <p>本篇文章主要介绍冒泡排序（升序和降序）。</p>
-<h2 id="1、冒泡排序（升序）"><a href="#1、冒泡排序（升序）" class="headerlink" title="1、冒泡排序（升序）"></a>1、冒泡排序（升序）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var arr=[12,2,34,23,34,56,9,67,5,6,3,45];</div><div class="line"></div><div class="line">function bubbleSortAsc(arr)&#123;</div><div class="line">    var length=arr.length;</div><div class="line">    var temp;</div><div class="line">    for(var i=0;i&lt;length-1;i++)&#123;</div><div class="line">        for(var j=i+1;j&lt;length;j++)&#123;</div><div class="line">            if(arr[i]&gt;arr[j])&#123; //升序</div><div class="line">                temp=arr[i];</div><div class="line">                arr[i]=arr[j];</div><div class="line">                arr[j]=temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line">console.log(bubbleSortAsc(arr));  //[ 2, 3, 5, 6, 9, 12, 23, 34, 34, 45, 56, 67 ]</div></pre></td></tr></table></figure>
-<h2 id="2、冒泡排序（降序）"><a href="#2、冒泡排序（降序）" class="headerlink" title="2、冒泡排序（降序）"></a>2、冒泡排序（降序）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">var arr=[12,2,34,23,34,56,9,67,5,6,3,45];</div><div class="line">function bubbleSortAsc(arr)&#123;</div><div class="line">    var length=arr.length;</div><div class="line">    var temp;</div><div class="line">    for(var i=0;i&lt;length-1;i++)&#123;</div><div class="line">        for(var j=i+1;j&lt;length;j++)&#123;</div><div class="line">            if(arr[i]&gt;arr[j])&#123; //升序</div><div class="line">                temp=arr[i];</div><div class="line">                arr[i]=arr[j];</div><div class="line">                arr[j]=temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line">console.log(bubbleSortAsc(arr));  //[ 2, 3, 5, 6, 9, 12, 23, 34, 34, 45, 56, 67 ]</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">var arr=[12,2,34,23,34,56,9,67,5,6,3,45];</div><div class="line"></div><div class="line">function bubbleSortDsc(arr)&#123;</div><div class="line">    var length=arr.length;</div><div class="line">    var temp;</div><div class="line">    for(var i=0;i&lt;length-1;i++)&#123;</div><div class="line">        for(var j=i+1;j&lt;length;j++)&#123;</div><div class="line">            if(arr[i]&lt;arr[j])&#123; //降序</div><div class="line">                temp=arr[i];</div><div class="line">                arr[i]=arr[j];</div><div class="line">                arr[j]=temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return arr;</div><div class="line">&#125;</div><div class="line">console.log(bubbleSortDsc(arr)); //[ 67, 56, 45, 34, 34, 23, 12, 9, 6, 5, 3, 2 ]</div></pre></td></tr></table></figure>
-      
-    </div>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-      </footer>
-  </div>
-</article>
-
-
-
-
-
-  <article class="post">
-  <div class="post-content">
-    <header>
-      
-  
-    <h1 class="title"><a href="/2017/07/05/dom/">原生JavaScript操作DOM节点</a></h1>
-  
-
-      
-        <time datetime="2017-07-05T09:31:39.629Z">2017-07-05</time>
-      
-    </header>
-    <div class="entry">
-      
-        <p>本篇文章主要介绍利用原生js进行DOM节点的操作，主要包括创建、添加、删除、替换、插入、复制、移动等操作。</p>
-<h2 id="1、创建节点"><a href="#1、创建节点" class="headerlink" title="1、创建节点"></a>1、创建节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var dom=document.createElement(&quot;div&quot;);  //创建元素节点</div><div class="line">var text=document.createTextNode(&quot;hello Moyi&quot;);  //创建文本节点</div></pre></td></tr></table></figure>
-<h2 id="2、插入节点"><a href="#2、插入节点" class="headerlink" title="2、插入节点"></a>2、插入节点</h2><h3 id="appendChild"><a href="#appendChild" class="headerlink" title="appendChild()"></a>appendChild()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dom.appendChild(text); //将文本节点插入到dom节点中 </div><div class="line">parent.appendChild(dom); //将子元素节点插入到父元素节点</div></pre></td></tr></table></figure>
-<p>注意：appendchild()是在父节点中的子节点的末尾添加新的节点（相对于父节点来说）。</p>
-<h3 id="insertBefore"><a href="#insertBefore" class="headerlink" title="insertBefore()"></a>insertBefore()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parent.insertBefore(newNode,oldNode);</div></pre></td></tr></table></figure>
-<p>注意：insertBefore()是在已有的节点前添加新的节点（相对于子节点来说的）其中parent代表父节点，newNode代表新子节点，oldNode代表老子节点。</p>
-<h2 id="3、删除节点"><a href="#3、删除节点" class="headerlink" title="3、删除节点"></a>3、删除节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parent.removeChild(child); //删除父节点parent下面的子节点child</div></pre></td></tr></table></figure>
-<h2 id="4、替换节点"><a href="#4、替换节点" class="headerlink" title="4、替换节点"></a>4、替换节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parent.replaceChild(newchild,oldchild); //将父节点parent下面的子节点oldchild替换为新的子节点newchild</div></pre></td></tr></table></figure>
-<h2 id="5、复制节点"><a href="#5、复制节点" class="headerlink" title="5、复制节点"></a>5、复制节点</h2><h3 id="深复制：复制节点和节点下面的所有子节点"><a href="#深复制：复制节点和节点下面的所有子节点" class="headerlink" title="深复制：复制节点和节点下面的所有子节点"></a>深复制：复制节点和节点下面的所有子节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var cloneNode=parent.cloneNode(true);</div></pre></td></tr></table></figure>
-<p>注意：会复制节点parent和parent的子节点下面的所有内容。</p>
-<h3 id="浅复制：只复制当前节点，不复制子节点"><a href="#浅复制：只复制当前节点，不复制子节点" class="headerlink" title="浅复制：只复制当前节点，不复制子节点"></a>浅复制：只复制当前节点，不复制子节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var cloneNode=parent.cloneNode(false);</div></pre></td></tr></table></figure>
-<p>注意：只会复制节点parent的内容。</p>
-<h2 id="6、查找节点"><a href="#6、查找节点" class="headerlink" title="6、查找节点"></a>6、查找节点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">document.getElementById(&quot;id&quot;); //通过id查找</div><div class="line">docuemnt.getElementsByClassName(&quot;class</div><div class="line">Name&quot;); //通过类名class查找</div><div class="line">document.getElementSByTagName(&quot;p&quot;); //通过标签名查找</div></pre></td></tr></table></figure>
-<h3 id="根节点"><a href="#根节点" class="headerlink" title="根节点"></a>根节点</h3><p>有两种特殊的文档属性可用来访问根节点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">document.documentElement</div><div class="line">document.body</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-      </footer>
-  </div>
-</article>
-
-
-
-
-
 
 <nav id="pagination">
   
@@ -262,15 +276,23 @@
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="search" name="q" results="0" placeholder="Buscar">
     <input type="hidden" name="q" value="site:zhangrong915.github.io">
   </form>
 </div>
 
   
 <div class="widget tag">
-  <h3 class="title">Neueste Artikel</h3>
+  <h3 class="title">Entradas Recientes</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2017/07/18/ArrayLike/">类数组+类数组转为数组</a>
+      </li>
+    
+      <li>
+        <a href="/2017/07/17/pageLoad/">比较window.onload和DOMContentLoaded</a>
+      </li>
     
       <li>
         <a href="/2017/07/16/verticalCenter/">元素垂直居中布局的实现</a>
@@ -284,14 +306,6 @@
         <a href="/2017/07/09/isPrime/">质数（素数）的判断</a>
       </li>
     
-      <li>
-        <a href="/2017/07/09/bubbleSort/">冒泡排序</a>
-      </li>
-    
-      <li>
-        <a href="/2017/07/05/dom/">原生JavaScript操作DOM节点</a>
-      </li>
-    
   </ul>
 </div>
 
@@ -300,7 +314,7 @@
 
   
 <div class="widget tagcloud">
-  <h3 class="title">Tag-Cloud</h3>
+  <h3 class="title">Nube de Etiquetas</h3>
   <div class="entry">
     <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
   </div>
